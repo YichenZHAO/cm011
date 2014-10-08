@@ -1,0 +1,10 @@
+---
+title: "cm011"
+author: "Yichen Zhao"
+date: "Wednesday, October 08, 2014"
+output: html_document
+---
+Here is some inline R code. `r 2+2`.
+
+The `cars` dataset has 50 rows.
+
