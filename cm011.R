@@ -30,10 +30,43 @@ write.table(hDat, "hDat.txt")
 write.table(hDat, "hDat.csv", sep = ",", row.names = FALSE, quote = FALSE) 
 # create a "csv" file, divide columns by ",", delete the "row names" and "quotation marks"
 
-# inspect the levels of country
+### inspect the levels of country
+levels(hDat$country)
 
+## reorder country according to one of the summary stats we have played with
+iDat <- hDat %>%
+  mutate(country = reorder(country, lifeExp, max))
+data.frame(levels(hDat$country), levels(iDat$country))
 
+## write to file with write.table()
+write.table(iDat, "hDat.csv", sep = ",", row.names = FALSE, quote = FALSE) 
+# delete the R object from the workspace
+rm(iDat)
+# check if iDat is still there
+iDat
+# re-import in csv file
+iDat <- read.csv("hDat.csv")
 
+levels(iDat$country)
 
+#reorder the country factor
+iDat <- hDat %>%
+  mutate(country = reorder(country, lifeExp, max))
+data.frame(levels(hDat$country), levels(iDat$country))
 
+# write to file with saveRDS()
+saveRDS(iDat, "iDat.rds")
+# delete the R object from the workspace
+rm(iDat)
+# check if iDat is still there
+iDat
+# re-import in RDS file
+iDat <- readRDS("iDat.rds")
+str(iDat)
+levels(iDat$country)
+
+## write to file with dput()
+dput(iDat,"iDat-dput.txt")
+str(iDat)
+levels(iDat$country)
 
